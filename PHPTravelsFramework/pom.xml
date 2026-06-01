@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+  http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.phptravels</groupId>
+  <artifactId>PHPTravelsFramework</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+
+    <!-- Selenium WebDriver: controls the browser -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.18.1</version>
+    </dependency>
+
+    <!-- Cucumber Java: @Given @When @Then annotations -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>7.15.0</version>
+    </dependency>
+
+    <!-- Cucumber JUnit: runs Cucumber via JUnit -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>7.15.0</version>
+    </dependency>
+
+    <!-- JUnit: test runner -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- WebDriverManager: auto downloads browser drivers -->
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.7.0</version>
+    </dependency>
+
+    <!-- Apache POI: reads .xlsx Excel files -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.2.3</version>
+    </dependency>
+
+    <!-- Apache POI OOXML: required for .xlsx format -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>5.2.3</version>
+    </dependency>
+
+    <!-- ExtentReports: beautiful HTML test reports -->
+    <dependency>
+      <groupId>com.aventstack</groupId>
+      <artifactId>extentreports</artifactId>
+      <version>5.1.1</version>
+    </dependency>
+
+    <!-- ExtentReports Cucumber7 Adapter -->
+    <dependency>
+      <groupId>tech.grasshopper</groupId>
+      <artifactId>extentreports-cucumber7-adapter</artifactId>
+      <version>1.14.0</version>
+    </dependency>
+
+    <!-- Firefox driver support -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-firefox-driver</artifactId>
+      <version>4.18.1</version>
+    </dependency>
+
+    <!-- Edge driver support -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-edge-driver</artifactId>
+      <version>4.18.1</version>
+    </dependency>
+
+  </dependencies>
+
+</project>
