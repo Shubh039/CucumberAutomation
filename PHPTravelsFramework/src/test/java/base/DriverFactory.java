@@ -2,9 +2,9 @@ package base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.ConfigReader;
 
@@ -19,7 +19,6 @@ import utilities.ConfigReader;
 // Each thread has its own locker with its own driver inside.
 // Thread 1 → its own Chrome window
 // Thread 2 → its own Chrome window (separate)
-
 public class DriverFactory {
 
     // ThreadLocal stores one WebDriver per thread
@@ -31,6 +30,7 @@ public class DriverFactory {
     // and creates the appropriate driver
     public static void createDriver() {
         String browser = ConfigReader.getBrowser().toLowerCase();
+        boolean headless = ConfigReader.isHeadless();
         WebDriver webDriver;
 
         switch (browser) {
@@ -49,12 +49,24 @@ public class DriverFactory {
             case "chrome":
             default:
                 WebDriverManager.chromedriver().setup();
-                webDriver = new ChromeDriver();
-                System.out.println("Chrome browser launched.");
+                ChromeOptions options = new ChromeOptions();
+                if (headless) {
+                    options.addArguments("--headless=new");
+                    options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-dev-shm-usage");
+                    options.addArguments("--window-size=1920,1080");
+                    options.addArguments("--disable-gpu");
+                    options.addArguments("--remote-allow-origins=*");
+                    System.out.println("Chrome browser launched in headless mode.");
+                } else {
+                    System.out.println("Chrome browser launched.");
+                }
+                webDriver = new ChromeDriver(options);
                 break;
         }
 
         webDriver.manage().window().maximize();
+
         // store this driver for the current thread
         driver.set(webDriver);
     }

@@ -45,4 +45,10 @@ public class ConfigReader {
         return Integer.parseInt(
             properties.getProperty("explicitWait", "15"));
     }
+    public static boolean isHeadless() {
+        // -Dheadless=true passed via Maven/Jenkins takes priority
+        String sysProp = System.getProperty("headless");
+        if (sysProp != null) return Boolean.parseBoolean(sysProp);
+        return Boolean.parseBoolean(properties.getProperty("headless", "false"));
+    }
 }
