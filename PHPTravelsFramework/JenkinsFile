@@ -1,52 +1,60 @@
 pipeline {
     agent any
- 
+
     tools {
         maven 'Maven3'
     }
- 
+
     stages {
- 
+
         stage('Checkout') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/Shubh039/CucumberAutomation'
+                    url: 'https://github.com/Shubh039/CapstoneProject_testNGL'
             }
         }
- 
+
         stage('Build') {
             steps {
-                bat 'mvn clean'
+                bat 'mvn clean install -DskipTests'
             }
         }
- 
-        stage('Compile') {
+
+        stage('Run Negative Tests') {
             steps {
-                bat 'mvn compile'
+                bat 'mvn test -Dsurefire.suiteXmlFiles=testng-negative.xml'
             }
         }
- 
-        stage('Test') {
+
+
+        stage('Archive Reports') {
             steps {
-                bat 'mvn test'
-            }
-        }
- 
-        stage('Package') {
-            steps {
-                bat 'mvn package'
+
+                archiveArtifacts artifacts: 'reports/**/*',
+                                 allowEmptyArchive: true
+
+                archiveArtifacts artifacts: 'screenshots/**/*',
+                                 allowEmptyArchive: true
+
+                archiveArtifacts artifacts: 'logs/**/*',
+                                 allowEmptyArchive: true
             }
         }
     }
- 
+
     post {
+
+        always {
+            junit allowEmptyResults: true,
+                  testResults: '**/target/surefire-reports/*.xml'
+        }
+
         success {
             echo 'Build Successful'
         }
- 
+
         failure {
             echo 'Build Failed'
         }
     }
 }
- 
